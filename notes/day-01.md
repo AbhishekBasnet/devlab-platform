@@ -105,8 +105,8 @@ sudo systemctl enable --now fail2ban
 sudo dpkg-reconfigure -plow unattended-upgrades
 ```
 
-- `fail2ban`: bans IPs with repeated failed logins.
-- `unattended-upgrades`: automatic security patches.
+- `fail2ban`: bans IPs with repeated failed logins. **Why:** stops brute-force bots from hammering SSH (defense in depth, even with passwords off).
+- `unattended-upgrades`: installs security patches automatically. **Why:** unpatched software is a top way servers get compromised, and this means I can't forget.
 - `tmux`: long tasks survive a dropped SSH connection.
 - Reserve the server's IP in the router (static lease) so `ssh devlab` never breaks.
 
