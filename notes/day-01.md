@@ -123,6 +123,32 @@ cat /etc/apt/apt.conf.d/20auto-upgrades    # both lines should be "1"
 
 ---
 
+## 5. Verify everything (run after any new server setup)
+
+**On the server:**
+
+```bash
+sudo sshd -T | grep -iE 'passwordauth|permitroot'   # both must say "no"
+sudo ufw status verbose                             # active, deny incoming, 22/tcp ALLOW
+sudo systemctl status fail2ban                      # active (running)
+sudo fail2ban-client status sshd                    # jail sshd exists
+systemctl status unattended-upgrades                # active (running)
+cat /etc/apt/apt.conf.d/20auto-upgrades             # both lines "1"
+tmux -V                                             # tmux installed
+ip -4 a                                             # IP is the reserved one
+```
+
+**From the PC (new terminal):**
+
+```bash
+ssh devlab                                              # logs in, no password
+ssh -o PubkeyAuthentication=no joshua@192.168.2.158     # refused: Permission denied (publickey)
+```
+
+**After a reboot:** `sudo reboot`, wait ~1 min, then `ssh devlab` and `ip -4 a` again. The IP must not change, and `fail2ban` and `ufw` must come back on their own.
+
+---
+
 ## Lockout-prevention rules (summary)
 
 1. Prove key login works in a **new** terminal **before** disabling passwords.
