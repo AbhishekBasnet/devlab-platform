@@ -163,4 +163,4 @@ ssh -o PubkeyAuthentication=no joshua@192.168.2.158     # refused: Permission de
 - [x] Password + root SSH login verified off
 - [x] `ufw` active with only SSH allowed
 - [x] `fail2ban`, `unattended-upgrades`, `tmux` installed
-- [ ] Static DHCP lease set, IP survives a reboot
+- [x] Static DHCP lease set, IP survives a reboot
