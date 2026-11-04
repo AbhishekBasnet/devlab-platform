@@ -42,11 +42,11 @@
 - GitHub keys cleaned. Only the Fedora key (titled "GitHub CLI") remains.
 - Notes written: `day-01.md` (checklist), `incidents.md` (SSH override entry).
 
-*Reported done by the user. Not re-verified after the reinstall: run `sudo bash bootstrap.sh verify` on the server.*
+*Verified on the new install (2026-11-04) with `sudo bash bootstrap.sh verify`: `permitrootlogin no`, `passwordauthentication no`, ufw active (OpenSSH only), fail2ban and unattended-upgrades active, IP 192.168.2.158 on `enp1s0`.*
 
 ## Continue from here
 
-1. Verify the server: `ssh devlab`, then `sudo bash bootstrap.sh verify`. Expect `passwordauthentication no`, `permitrootlogin no`, ufw active, fail2ban and unattended-upgrades active.
+1. (Server already verified after the reinstall.) Optional quick re-check: `ssh devlab`, then `sudo bash bootstrap.sh verify`.
 2. Fill in `notes/concepts.md` (the user's own words: why keys beat passwords, why `ufw allow` comes before `enable`).
 3. Tick Week 0 in the roadmap tracker.
 4. **Start Week 1, Day 1** (filesystem, navigation, file ops, vim, `apt`). Create `notes/week1-day1.md`.
