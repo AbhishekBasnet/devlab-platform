@@ -101,9 +101,20 @@ Expected: `Status: active`, `Default: deny (incoming), allow (outgoing)`, `22/tc
 
 ```bash
 sudo apt update && sudo apt install -y fail2ban unattended-upgrades tmux
-sudo systemctl enable --now fail2ban
-sudo dpkg-reconfigure -plow unattended-upgrades
+sudo systemctl enable --now fail2ban       # start now AND at every boot
+sudo dpkg-reconfigure -plow unattended-upgrades   # choose "Yes" to enable
 ```
+
+Verify (never assume):
+
+```bash
+sudo systemctl status fail2ban             # active (running)
+sudo fail2ban-client status sshd           # SSH jail is watching
+systemctl status unattended-upgrades       # active
+cat /etc/apt/apt.conf.d/20auto-upgrades    # both lines should be "1"
+```
+
+> Typo trap: `sudo apt install ...`, not `sudo install ...` (`install` is a different program that copies files).
 
 - `fail2ban`: bans IPs with repeated failed logins. **Why:** stops brute-force bots from hammering SSH (defense in depth, even with passwords off).
 - `unattended-upgrades`: installs security patches automatically. **Why:** unpatched software is a top way servers get compromised, and this means I can't forget.
