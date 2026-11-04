@@ -136,5 +136,5 @@ cat /etc/apt/apt.conf.d/20auto-upgrades    # both lines should be "1"
 - [x] Key login works via `ssh devlab`
 - [x] Password + root SSH login verified off
 - [x] `ufw` active with only SSH allowed
-- [ ] `fail2ban`, `unattended-upgrades`, `tmux` installed
+- [x] `fail2ban`, `unattended-upgrades`, `tmux` installed
 - [ ] Static DHCP lease set, IP survives a reboot
