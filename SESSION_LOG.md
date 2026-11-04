@@ -46,11 +46,11 @@
 
 ## Continue from here
 
-1. (Server already verified after the reinstall.) Optional quick re-check: `ssh devlab`, then `sudo bash bootstrap.sh verify`.
-2. Fill in `notes/concepts.md` (the user's own words: why keys beat passwords, why `ufw allow` comes before `enable`).
-3. Tick Week 0 in the roadmap tracker.
-4. **Start Week 1, Day 1** (filesystem, navigation, file ops, vim, `apt`). Create `notes/week1-day1.md`.
-5. Week 1 lab to plan for: LVM on the empty HDD (PV, VG, LV, mkfs, mount, fstab by UUID).
+1. Fill in `notes/concepts.md` (the user's own words: why keys beat passwords, why `ufw allow` comes before `enable`). Still empty.
+2. **Do Week 1, Day 1** yourself using the skeleton `notes/week1-day1.md` (filesystem, navigation, file ops, vim, `apt`, hard vs soft links). Fill in its "Notes" sections.
+3. Then Week 1, Day 2: users, groups, `sudo`, permissions, `umask`, special bits. Create `notes/week1-day2.md`.
+4. Week 1 lab to plan for: LVM on the empty HDD (PV, VG, LV, mkfs, mount, fstab by UUID). Needs explicit confirmation before touching the disk.
+5. Optional quick re-check: `ssh devlab`, then `sudo bash bootstrap.sh verify`.
 
 ## Session history
 
@@ -60,3 +60,9 @@
 - Found the Ubuntu install was on the HDD and the SSD held an old Linux Mint. Decided to reinstall on the SSD and wipe both drives.
 - Wrote `scripts/bootstrap.sh` (two phases: setup, then `harden`).
 - Created this file.
+
+### Session 2 (2026-11-04)
+- Read the log and roadmap. Week 0 was already verified, so no server work this session.
+- Ticked Week 0 in the roadmap tracker (`devops-roadmap.md`).
+- Created the skeleton `notes/week1-day1.md` (tasks and empty note sections, no answers, per the AI rule).
+- Left `notes/concepts.md` for the user to write.
