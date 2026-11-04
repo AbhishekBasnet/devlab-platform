@@ -164,3 +164,24 @@ ssh -o PubkeyAuthentication=no joshua@192.168.2.158     # refused: Permission de
 - [x] `ufw` active with only SSH allowed
 - [x] `fail2ban`, `unattended-upgrades`, `tmux` installed
 - [x] Static DHCP lease set, IP survives a reboot
+
+---
+
+## Automation: `scripts/bootstrap.sh`
+
+Everything above, scripted. Two phases so there's no lockout risk:
+
+```bash
+# from the PC, copy it over (password login works right after install)
+scp scripts/bootstrap.sh joshua@<server-ip>:
+
+# on the server: phase 1 (packages, ufw, fail2ban, auto-updates, lid switch)
+sudo bash bootstrap.sh
+
+# on the PC, NEW terminal: ssh-keygen -R <server-ip>; ssh joshua@<server-ip>  (key, no password)
+
+# on the server: phase 2 (asks you to confirm key login first)
+sudo bash bootstrap.sh harden
+```
+
+The hardening goes in `/etc/ssh/sshd_config.d/00-hardening.conf`. `00-` sorts before `50-cloud-init.conf`, and sshd uses the first value it reads, so it wins.
