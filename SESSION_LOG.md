@@ -46,11 +46,14 @@
 
 ## Continue from here
 
+Mode for Week 1: quiz-only, no labs. The user answers, Claude grades and says plainly when something is wrong or unknown. Notes are written only when the user says so.
+
 1. Fill in `notes/concepts.md` (the user's own words: why keys beat passwords, why `ufw allow` comes before `enable`). Still empty.
-2. **Do Week 1, Day 1** yourself using the skeleton `notes/week1-day1.md` (filesystem, navigation, file ops, vim, `apt`, hard vs soft links). Fill in its "Notes" sections.
-3. Then Week 1, Day 2: users, groups, `sudo`, permissions, `umask`, special bits. Create `notes/week1-day2.md`.
-4. Week 1 lab to plan for: LVM on the empty HDD (PV, VG, LV, mkfs, mount, fstab by UUID). Needs explicit confirmation before touching the disk.
-5. Optional quick re-check: `ssh devlab`, then `sudo bash bootstrap.sh verify`.
+2. **Week 1 Day 1:** quizzed and finished. Notes in `notes/week1-day1.md`. Still open: why a hard link can't cross filesystems.
+3. **Week 1 Day 2** (users, groups, `sudo`, permissions, `umask`, special bits): taught and quizzed once, finished for now. No notes file by request. **The user will requiz later.** Weak spots from the first quiz: `usermod -aG group user` syntax and what `-a` does, what `/etc/passwd` holds vs `/etc/shadow`, `sudo` vs `su` and why `visudo`, setgid on a directory (new files inherit the folder's group), sticky bit, reading `---s--x--x`, directories start at 777 for umask.
+4. **Next: Week 1 Day 3** (processes, signals, `top`/`htop`, `tmux`, background jobs). Quiz format.
+5. Then D4 (systemd), D5 (disks, LVM, swap), weekend (logs, `dmesg`, time sync).
+6. LVM lab on the empty HDD is optional. Needs explicit confirmation before touching the disk.
 
 ## Session history
 
@@ -66,3 +69,9 @@
 - Ticked Week 0 in the roadmap tracker (`devops-roadmap.md`).
 - Created the skeleton `notes/week1-day1.md` (tasks and empty note sections, no answers, per the AI rule).
 - Left `notes/concepts.md` for the user to write.
+
+### Session 3 (2026-11-04 to 2026-11-05)
+- Switched to quiz-only mode for Week 1 (no labs).
+- Quizzed Day 1 (filesystem, `apt`, links). Corrections written to `notes/week1-day1.md` and committed.
+- Taught and quizzed Day 2. Main confusions worked through: octal vs letter `chmod`, `umask`, numeric UIDs, `/etc/passwd` vs `/etc/shadow`, setuid/setgid/sticky (file vs directory), what `sudo` does as a setuid program. First quiz about 4 of 9. User will requiz later; no notes file.
+- Inspected the Fedora Plex and ABS containers (read-only). Plex and ABS run as root inside Docker (no `PUID`/`PGID`). NAS volumes are CIFS with the credentials in plain text in the Docker volume options, so the NAS password should be changed and moved to a `credentials=` file.
