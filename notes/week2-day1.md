@@ -27,3 +27,19 @@
 
 ## Not answered
 OSI layer list, DORA order, subnet splitting (skipped: already known from the networks class).
+
+## Commands
+
+| Command | Flag / part | Meaning | Why you use it |
+|---|---|---|---|
+| `ip a` | `a` = `addr` | Show interfaces and their IPs | See your private IP, mask and whether DHCP gave one (`169.254.x.x` = DHCP failed) |
+| `ip -br a` | `-br` = brief | One line per interface | Quick overview |
+| `ip r` | `r` = `route` | Routing table; `default via X` is the gateway | Find the gateway; check which route a destination uses |
+| `ip route get 1.1.1.1` | | Which route/gateway a packet to that IP would take | Confirms "same subnet or via gateway" |
+| `ip neigh` | | ARP table (IP, MAC, state) | See who your machine has talked to; spot a changing MAC (duplicate IP) |
+| `ip -br link` | `link` = L2 | Interfaces with MAC addresses | Find your own MAC |
+| `curl ifconfig.me` | | Your public IP as the internet sees it | Compare with `ip a`: different = behind NAT |
+| `ping -c 4 host` | `-c 4` = send 4 packets then stop | Reachability and round-trip time (ICMP, L3) | Test the gateway, then `8.8.8.8`, then a name, to find the failing layer |
+| `sudo tcpdump -i any arp` | `-i any` = all interfaces | Watch ARP requests and replies live | See ARP happen |
+
+Ping order for "no internet": gateway, then `8.8.8.8`, then a name. If the IP works and the name fails, it's DNS (Day 2).

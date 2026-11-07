@@ -21,3 +21,22 @@
 ## Weak spots
 - The DNS fix for "ping IP works, name fails" (the commands above).
 - Open checks and quiz questions still unanswered: Check 1 to 5, quiz Q1, Q4, Q5, Q6, Q7.
+
+## Commands
+
+| Command | Flag / part | Meaning | Why you use it |
+|---|---|---|---|
+| `dig example.com` | | Full answer (question, answer, authority, server, query time) | See `status`, TTL and which server answered |
+| `dig +short example.com` | `+short` | Answer only | Step 1 of the ladder: does the name resolve? |
+| `dig example.com MX` | record type (`A`, `AAAA`, `CNAME`, `MX`, `TXT`, `NS`) | Ask for one record type | Check mail, verification TXT, nameservers |
+| `dig @1.1.1.1 example.com` | `@server` | Ask a specific resolver, skipping your default | Compare with the default: differs = your resolver or cache is the problem |
+| `dig +trace example.com` | `+trace` | Walk root, TLD, authoritative | Find which server holds a stale or wrong record |
+| `dig +noall +answer example.com` | `+noall +answer` | Hide everything except the answer section (keeps TTL) | Clean output with the TTL counting down |
+| `dig -x 203.0.113.10` | `-x` = reverse | PTR lookup, IP to name | Reverse DNS, mail server checks |
+| `resolvectl status` | | DNS servers per interface (systemd-resolved) | See which resolver the machine really uses |
+| `resolvectl query example.com` | | Resolve the way apps do, via the local stub | Compare with `dig`: differs = local config |
+| `resolvectl flush-caches` | | Clear the local DNS cache | After a DNS change that "hasn't arrived" |
+| `getent hosts example.com` | | Resolve like apps do (`/etc/hosts` first, then DNS) | Shows what an app sees; `dig` ignores `/etc/hosts` |
+| `cat /etc/resolv.conf` | | Resolver config (`127.0.0.53` = systemd-resolved stub) | See where lookups go |
+
+`dig` status values: `NOERROR` worked, `NXDOMAIN` name doesn't exist, `SERVFAIL` resolver couldn't get an answer.
